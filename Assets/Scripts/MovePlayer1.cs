@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MovePlayer1 : MonoBehaviour
+public class MovePlayer1 : NetworkBehaviour
 {
     public bool Grounded = true;
 
@@ -15,6 +16,9 @@ public class MovePlayer1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+	 if (this.isLocalPlayer) {
+
         if(Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
@@ -38,6 +42,7 @@ public class MovePlayer1 : MonoBehaviour
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
             Grounded = false;
         }
+	  }
     }
 
     private void OnCollisionEnter(Collision collision)
