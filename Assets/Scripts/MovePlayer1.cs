@@ -5,42 +5,75 @@ using UnityEngine.Networking;
 
 public class MovePlayer1 : NetworkBehaviour
 {
+    public float MinX, MaxX, MinY, MaxY, SensitivityX, SensitivityY, Offset;
+
+    private float RotationX, RotationY;
+
+    public Camera Cam;
+
+    public GameObject Player;
     public bool Grounded = true;
+    public float SetSpeed;
+    private float Speed;
+    public Vector3 Pos;
+    public float LeftXBound, RightXBound, FrontZBound, BackZBound;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
 
 	 if (this.isLocalPlayer) {
+   
+        if (!Grounded)
+            Speed = SetSpeed / 2;
+        else Speed = SetSpeed;
 
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && InBounds())
         {
-            transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
+            transform.Translate(Vector3.left * Speed);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && InBounds())
         {
-            transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+            transform.Translate(Vector3.right * Speed);
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && InBounds())
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.5f);
+            transform.Translate(Vector3.forward * Speed);
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) && InBounds())
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.5f);
+            transform.Translate(Vector3.back * Speed);
         }
 
         if(Grounded && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0));
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 200, 0));
             Grounded = false;
+        }
+        
+        RotationX += Input.GetAxis("Mouse Y") * SensitivityX;
+        RotationY += Input.GetAxis("Mouse X") * SensitivityY;
+
+        RotationX = Mathf.Clamp(RotationX, MinX, MaxX);
+
+        transform.localEulerAngles = new Vector3(0, RotationY, 0);
+
+        Cam.transform.localEulerAngles = new Vector3(-RotationX, RotationY, 0);
+
+        Cam.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 	  }
     }
@@ -55,5 +88,12 @@ public class MovePlayer1 : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             Grounded = false;
+    }
+
+    private bool InBounds()
+    {
+        if (transform.position.x > LeftXBound && transform.position.x < RightXBound && transform.position.z > BackZBound && transform.position.z < FrontZBound)
+            return true;
+        return false;
     }
 }
