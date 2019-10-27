@@ -86,7 +86,7 @@ public class MovePlayer1 : NetworkBehaviour
             if (Input.GetMouseButtonDown(0) && Time.time - LastTimeCheck >= 1)
             {
                 Debug.Log("Entered if statement");
-                CmdShoot();
+                Shoot();
                 LastTimeCheck = Time.time;
             }
 
@@ -111,9 +111,8 @@ public class MovePlayer1 : NetworkBehaviour
             return true;
         return false;
     }
-
-    [Command]
-    public void CmdShoot()
+    
+    public void Shoot()
     {
         Debug.Log("Mouse X and Mouse Y: " + TrackPlayerWithCamera.MouseX + TrackPlayerWithCamera.MouseY);
         GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
