@@ -78,7 +78,6 @@ public class MovePlayer1 : NetworkBehaviour
             
             if (Input.GetMouseButtonDown(0) && Time.time - LastTimeCheck >= 1)
         {
-                Debug.Log("Entered if statement");
                 CmdShoot();
         }
                 
@@ -113,10 +112,10 @@ public class MovePlayer1 : NetworkBehaviour
     [Command]
     private void CmdShoot()
     {
-        GameObject NewProj = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.Euler(-RotationX, RotationY, 0));
-        Rigidbody RB = NewProj.GetComponent<Rigidbody>();
+        GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.Euler(-RotationX, RotationY, 0));
+        Rigidbody RB = Clone.GetComponent<Rigidbody>();
         RB.velocity = Cam.transform.forward * 40;
-        NetworkServer.Spawn(NewProj);
+        NetworkServer.Spawn(Clone);
         LastTimeCheck = Time.time;
     }
 }

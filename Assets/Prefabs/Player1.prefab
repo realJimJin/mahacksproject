@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 7917596406472908417}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,8 +240,10 @@ MonoBehaviour:
   SensitivityX: 10
   SensitivityY: 10
   Offset: 2
+  speed: 0.1
   Cam: {fileID: 0}
   Player: {fileID: 7917596406472908422}
+  Projectile: {fileID: 0}
   Grounded: 1
   SetSpeed: 0.5
   Pos: {x: 0, y: 0, z: 0}
