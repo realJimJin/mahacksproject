@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MovePlayer1 : MonoBehaviour
+public class MovePlayer1 : NetworkBehaviour
 {
     public float MinX, MaxX, MinY, MaxY, SensitivityX, SensitivityY, Offset;
 
@@ -26,6 +27,10 @@ public class MovePlayer1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+	 if (this.isLocalPlayer) {
+   
         if (!Grounded)
             Speed = SetSpeed / 2;
         else Speed = SetSpeed;
@@ -53,7 +58,7 @@ public class MovePlayer1 : MonoBehaviour
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 200, 0));
             Grounded = false;
         }
-
+        
         RotationX += Input.GetAxis("Mouse Y") * SensitivityX;
         RotationY += Input.GetAxis("Mouse X") * SensitivityY;
 
@@ -70,6 +75,7 @@ public class MovePlayer1 : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+	  }
     }
 
     private void OnCollisionEnter(Collision collision)
