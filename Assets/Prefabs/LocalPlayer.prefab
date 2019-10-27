@@ -86,4 +86,4 @@ MonoBehaviour:
   SensitivityY: 10
   MinX: -60
   MaxX: 60
-  Offset: 3
+  Offset: 2

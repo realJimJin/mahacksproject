@@ -40,7 +40,6 @@ public class MovePlayer1 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
 	 if (this.isLocalPlayer) {
    
         if (!Grounded)
@@ -79,8 +78,8 @@ public class MovePlayer1 : NetworkBehaviour
 
             LocPlayer.transform.position = transform.position;
 
-            RotationY += TrackPlayerWithCamera.MouseX;
-            RotationX += TrackPlayerWithCamera.MouseY;
+            RotationX += TrackPlayerWithCamera.MouseX * SensitivityX;
+            RotationY += TrackPlayerWithCamera.MouseY * SensitivityY;
 
             transform.localEulerAngles = new Vector3(0, RotationY, 0);
 

@@ -40,7 +40,5 @@ public class TrackPlayerWithCamera : NetworkBehaviour
         PlayerCam.transform.localEulerAngles = new Vector3(-RotationX, RotationY, 0);
 
         PlayerCam.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
-
-        Debug.Log("Mouse X and Mouse Y: " + MouseX + MouseY);
     }
 }
