@@ -3,12 +3,12 @@
 public class Projectile : MonoBehaviour
 {
     public Rigidbody rb;
-    public double speed = 0.01;
+    public double speed = 0.1;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(Vector3.forward * (float)speed, ForceMode.Impulse);
+        transform.Translate(Vector2.right * (float)speed);
     }
 
     void Update()
