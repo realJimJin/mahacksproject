@@ -23,7 +23,7 @@ public class MovePlayer1 : NetworkBehaviour
     public Vector3 Pos;
     public float LeftXBound, RightXBound, FrontZBound, BackZBound;
 
-    private int LastTimeCheck;
+    private float LastTimeCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +117,6 @@ public class MovePlayer1 : NetworkBehaviour
         Rigidbody RB = NewProj.GetComponent<Rigidbody>();
         RB.velocity = Cam.transform.forward * 40;
         NetworkServer.Spawn(NewProj);
-        LastTimeCheck = (int)Time.time;
+        LastTimeCheck = Time.time;
     }
 }
