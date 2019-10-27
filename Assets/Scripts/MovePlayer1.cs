@@ -28,7 +28,11 @@ public class MovePlayer1 : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (isLocalPlayer)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cam = Camera.main;
+        }
     }
 
     // Update is called once per frame

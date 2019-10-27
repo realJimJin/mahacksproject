@@ -18,9 +18,9 @@ public class ProjectileContactBehavior : NetworkBehaviour
             Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && !other.GetComponent<MovePlayer1>().isLocalPlayer)
+        if(other.tag == "Player")
             Destroy(gameObject);
     }
 }

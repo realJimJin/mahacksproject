@@ -241,9 +241,10 @@ MonoBehaviour:
   SensitivityY: 10
   Offset: 2
   speed: 0.1
-  Cam: {fileID: 0}
+  Cam: {fileID: 2380448568838136025, guid: b5dc1b811487c6b419aab2be570b962e, type: 3}
   Player: {fileID: 7917596406472908422}
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 3547783379582097685, guid: a01a076726f2844deb27b103df7f49e8,
+    type: 3}
   Grounded: 1
   SetSpeed: 0.5
   Pos: {x: 0, y: 0, z: 0}
