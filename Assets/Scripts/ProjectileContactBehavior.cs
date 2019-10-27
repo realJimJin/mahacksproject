@@ -26,7 +26,7 @@ public class ProjectileContactBehavior : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && !other.GetComponent<MovePlayer1>().isLocalPlayer)
+        if(other.tag == "Player")
         {
             Destroy(this.gameObject);
             other.transform.position = new Vector3(0, 12, 0);

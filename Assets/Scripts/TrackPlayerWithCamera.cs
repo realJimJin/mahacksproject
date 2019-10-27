@@ -41,4 +41,9 @@ public class TrackPlayerWithCamera : NetworkBehaviour
 
         PlayerCam.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
     }
+
+    public Camera GetCamPos()
+    {
+        return PlayerCam;
+    }
 }

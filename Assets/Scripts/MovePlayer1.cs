@@ -116,9 +116,9 @@ public class MovePlayer1 : NetworkBehaviour
     public void CmdShoot()
     {
         Debug.Log("Mouse X and Mouse Y: " + TrackPlayerWithCamera.MouseX + TrackPlayerWithCamera.MouseY);
-        GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
+        GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         Rigidbody RB = Clone.GetComponent<Rigidbody>();
-        RB.velocity = TrackPlayerWithCamera.PlayerCam.transform.forward * 40;
+        RB.velocity = LocPlayer.GetComponent<TrackPlayerWithCamera>().GetCamPos().transform.forward * 40;
         NetworkServer.Spawn(Clone);
         LastTimeCheck = Time.time;
     }
