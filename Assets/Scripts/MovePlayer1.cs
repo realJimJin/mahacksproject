@@ -27,7 +27,6 @@ public class MovePlayer1 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
 	 if (this.isLocalPlayer) {
    
