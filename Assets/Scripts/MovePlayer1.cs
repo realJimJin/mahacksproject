@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class MovePlayer1 : NetworkBehaviour
 {
-    public float MinX, MaxX, MinY, MaxY, SensitivityX, SensitivityY, Offset;
+    public float MinX, MaxX, MinY, MaxY, SensitivityX, SensitivityY;
 
     private float RotationX, RotationY;
 
@@ -13,7 +13,9 @@ public class MovePlayer1 : NetworkBehaviour
 
     public Camera Cam;
 
-    public GameObject Player;
+    public GameObject LocalPlayer;
+
+    private GameObject LocPlayer;
 
     public GameObject Projectile;
 
@@ -31,7 +33,7 @@ public class MovePlayer1 : NetworkBehaviour
         if (isLocalPlayer)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cam = Camera.main;
+            LocPlayer = Instantiate(LocalPlayer);
         }
     }
 
@@ -68,28 +70,26 @@ public class MovePlayer1 : NetworkBehaviour
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 200, 0));
             Grounded = false;
         }
-
-            RotationX += Input.GetAxis("Mouse Y") * SensitivityX;
-            RotationY += Input.GetAxis("Mouse X") * SensitivityY;
-
-            RotationX = Mathf.Clamp(RotationX, MinX, MaxX);
-
-            transform.localEulerAngles = new Vector3(0, RotationY, 0);
-
-            Cam.transform.localEulerAngles = new Vector3(-RotationX, RotationY, 0);
-
-            Cam.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
-            
-            if (Input.GetMouseButtonDown(0) && Time.time - LastTimeCheck >= 1)
-        {
-                CmdShoot();
-        }
                 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+            LocPlayer.transform.position = transform.position;
+
+            RotationY += TrackPlayerWithCamera.MouseX;
+            RotationX += TrackPlayerWithCamera.MouseY;
+
+            transform.localEulerAngles = new Vector3(0, RotationY, 0);
+
+            if (Input.GetMouseButtonDown(0) && Time.time - LastTimeCheck >= 1)
+            {
+                Debug.Log("Entered if statement");
+                CmdShoot();
+                LastTimeCheck = Time.time;
+            }
 
         }
     }
@@ -114,11 +114,12 @@ public class MovePlayer1 : NetworkBehaviour
     }
 
     [Command]
-    private void CmdShoot()
+    public void CmdShoot()
     {
-        GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.Euler(-RotationX, RotationY, 0));
+        Debug.Log("Mouse X and Mouse Y: " + TrackPlayerWithCamera.MouseX + TrackPlayerWithCamera.MouseY);
+        GameObject Clone = Instantiate(Projectile, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Rigidbody RB = Clone.GetComponent<Rigidbody>();
-        RB.velocity = Cam.transform.forward * 40;
+        RB.velocity = TrackPlayerWithCamera.PlayerCam.transform.forward * 40;
         NetworkServer.Spawn(Clone);
         LastTimeCheck = Time.time;
     }

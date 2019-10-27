@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 7917596406472908447}
   - component: {fileID: 7917596406472908417}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: ServerPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,10 +239,10 @@ MonoBehaviour:
   MaxY: 360
   SensitivityX: 10
   SensitivityY: 10
-  Offset: 2
   speed: 0.1
-  Cam: {fileID: 2380448568838136025, guid: b5dc1b811487c6b419aab2be570b962e, type: 3}
-  Player: {fileID: 7917596406472908422}
+  Cam: {fileID: 2567783863882237334, guid: 9b2c06e373993b84690572350bbf10b2, type: 3}
+  LocalPlayer: {fileID: 2464160479414302699, guid: 2f5c2bd60f05e7e41b5c5beee6aa9d37,
+    type: 3}
   Projectile: {fileID: 3547783379582097685, guid: a01a076726f2844deb27b103df7f49e8,
     type: 3}
   Grounded: 1
@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 7917596406473130682}
   - component: {fileID: 7917596406467695114}
   - component: {fileID: 7917596406472908441}
+  - component: {fileID: 4477206781742253054}
   m_Layer: 0
   m_Name: zbrushstickfigurBodysd
   m_TagString: Untagged
@@ -496,8 +497,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08812979, y: 0.021086328, z: 0.09931173}
-  m_Center: {x: -0.19654027, y: 0.19067661, z: -0.5562002}
+  m_Size: {x: 0.08812981, y: 0.021830933, z: 0.09931176}
+  m_Center: {x: -0.19654053, y: 0.19030428, z: -0.55620086}
+--- !u!65 &4477206781742253054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7917596406472908442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1009714, y: 0.0298721, z: 0.108585805}
+  m_Center: {x: -0.1992689, y: 0.18957098, z: -0.5571032}
 --- !u!1 &7917596406472908448
 GameObject:
   m_ObjectHideFlags: 0

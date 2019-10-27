@@ -15,12 +15,12 @@ public class ProjectileContactBehavior : NetworkBehaviour
     void Update()
     {
         if (transform.position.x < -100 || transform.position.x > 100 || transform.position.y < -100 || transform.position.y > 100)
-            Destroy(gameObject);
+            Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
-            Destroy(gameObject);
+            Destroy(this.gameObject);
     }
 }
